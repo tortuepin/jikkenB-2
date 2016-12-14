@@ -12,6 +12,7 @@ def makeIdf(filenames)
             word = getWord(tmp)
             if word == "EOS"
                 n += 1
+                tmpIdf = []
             end
             if idf.has_key?(word)
                 if !tmpIdf.include?(word)
