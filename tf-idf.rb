@@ -1,4 +1,7 @@
 def getWord(w)
+    if w.nil? then
+        return nil
+    end
     return w.split(" ")[0]
 end
 
@@ -11,7 +14,6 @@ def makeIdf(filenames)
         while tmp = f.gets
             word = getWord(tmp)
             if word == "EOS"
-                n += 1
                 tmpIdf = []
             end
             if idf.has_key?(word)
@@ -32,6 +34,7 @@ def makeIdf(filenames)
 
     #idfをもとめる
 
+    n = 1000
     idf.each_key do |key|
 #        print(idf[key], ":", key, "\n")
         dftmp = n/idf[key] 
@@ -46,14 +49,13 @@ end
 
 filenames = ["./text/train.cleaner.me", "./text/train.mp3player.me", "./text/test.me"]
 idf = makeIdf(filenames)
-
 hata = 0
-
 while true do
     wordArr = []
     wei = []
     tmp = gets
-    while tmp != "EOS" && !tmp.nill? do
+    word = getWord(tmp)
+    while !word.eql?("EOS") && !word.nil? do
         word = getWord(tmp)
         if !wordArr.include?(word) then
 	        wordArr.push(word)
@@ -61,13 +63,14 @@ while true do
         else
     	    wei[wordArr.index(word)] += idf[word]
         end
+	tmp = gets
     end
 
     for i in 0..wordArr.length-1 do
-        print(wordArr[i], ":",  "\t")
+        print(wordArr[i], ":", wei[i].round, "\t")
     end
     print("\n")
-    if tmp.nill? then
+    if tmp.nil? then
         break
     end 
 end
