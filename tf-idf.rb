@@ -67,7 +67,7 @@ while true do
     end
 
     for i in 0..wordArr.length-1 do
-        print(wordArr[i], ":", wei[i].round, "\t")
+        print(wordArr[i], ":", wei[i], "\t")
     end
     print("\n")
     if tmp.nil? then
