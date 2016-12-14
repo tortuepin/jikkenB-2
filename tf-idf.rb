@@ -4,11 +4,15 @@ end
 
 def makeIdf(filenames)
     idf = {}
+    n = 0
     filenames.each{|filename|
         f = open(filename)
         tmpIdf = []
         while tmp = f.gets
             word = getWord(tmp)
+            if word == "EOS"
+                n += 1
+            end
             if idf.has_key?(word)
                 if !tmpIdf.include?(word)
                     idf[word] += 1
@@ -24,10 +28,8 @@ def makeIdf(filenames)
         f.close
     }
     #ここまででdf値がもとまる
-    
 
     #idfをもとめる
-    n = filenames.length
 
     idf.each_key do |key|
 #        print(idf[key], ":", key, "\n")
@@ -57,5 +59,5 @@ end
 
 
 for i in 0..wordArr.length-1 do
-    print(wordArr[i], ":", wei[i], "\n")
+    print(wordArr[i], ":", wei[i], "\t")
 end

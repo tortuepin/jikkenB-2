@@ -14,5 +14,5 @@ end
 
 
 for i in 0..wordArr.length-1 do
-    print(wordArr[i], ":", wei[i], "\n")
+    print(wordArr[i], ":", wei[i], "\t")
 end
