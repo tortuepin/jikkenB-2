@@ -53,20 +53,21 @@ while true do
     wordArr = []
     wei = []
     tmp = gets
-    while tmp != "EOS" do
+    while tmp != "EOS" && !tmp.nill? do
         word = getWord(tmp)
         if !wordArr.include?(word) then
-	    wordArr.push(word)
+	        wordArr.push(word)
     	    wei.push(idf[word])
         else
     	    wei[wordArr.index(word)] += idf[word]
         end
     end
+
     for i in 0..wordArr.length-1 do
         print(wordArr[i], ":",  "\t")
     end
     print("\n")
-    if tmp == nil then
+    if tmp.nill? then
         break
     end 
 end
