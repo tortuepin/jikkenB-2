@@ -43,22 +43,32 @@ end
 
 
 
-wordArr = []
-wei = []
 
-filenames = ["text.txt", "text2.txt"]
+filenames = ["./text/train.cleaner.me", "./text/train.mp3player.me", "./text/test.me"]
 idf = makeIdf(filenames)
-while tmp = gets do
-    word = getWord(tmp)
-    if !wordArr.include?(word) then
-        wordArr.push(word)
-        wei.push(idf[word])
-    else
-        wei[wordArr.index(word)] += idf[word]
+
+hata = 0
+
+while true do
+    wordArr = []
+    wei = []
+    tmp = gets
+    while tmp != "EOS" do
+        word = getWord(tmp)
+        if !wordArr.include?(word) then
+	    wordArr.push(word)
+    	    wei.push(idf[word])
+        else
+    	    wei[wordArr.index(word)] += idf[word]
+        end
     end
+    for i in 0..wordArr.length-1 do
+        print(wordArr[i], ":",  "\t")
+    end
+    print("\n")
+    if tmp == nil then
+        break
+    end 
 end
 
 
-for i in 0..wordArr.length-1 do
-    print(wordArr[i], ":", wei[i], "\t")
-end
