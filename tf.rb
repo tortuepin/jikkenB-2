@@ -5,10 +5,13 @@ end
 wordArr = []
 wei = []
 
-while word = gets do
-    if !wordArr.include?(getWord(word)) then
-        wordArr.push(getWord(word))
+while tmp = gets do
+    word = getWord(tmp)
+    if !wordArr.include?(word) then
+        wordArr.push(word)
         wei.push(1)
+    else
+        wei[wordArr.index(word)] += 1
     end
 end
 
