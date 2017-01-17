@@ -35,11 +35,15 @@ def makeIdf(filenames)
     #idfをもとめる
 
     n = 1000
+    #ary = idf.sort{|a, b| b[1] <=> a[1]}
+    #ary.each{|val| print(val[0], "\t", val[1], "\n")}
 
     idf.each_key do |key|
+        #dftmp = Math.log(n) - Math.log(idf[key]) + 1
         dftmp = n/idf[key] 
         dftmp = Math.log(dftmp) + 1
         idf[key] = dftmp
+
     end
     return idf
 end
