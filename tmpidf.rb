@@ -44,40 +44,37 @@ def makeIdf(filenames)
     return idf
 end
 
-
+def makeTf(lines)
+  tf = {}
+  lines.each{|line|
+    word = getWord(line)
+    if !tf.has_key?(word) then
+      tf[word] = 1
+    else
+      tf[word] += 1
+    end
+  }
+  return tf
+end
 
 
 filenames = ["./text/train.cleaner.me", "./text/train.mp3player.me", "./text/test.me"]
 idf = makeIdf(filenames)
-hata = 0
-while true do
-    wordArr = []
-    wei = []
-    tmp = gets
-    word = getWord(tmp)
-    while !word.eql?("EOS") && !word.nil? do
-        word = getWord(tmp)
-        if !wordArr.include?(word) then
-	        wordArr.push(word)
-    	    wei.push(idf[word])
-        else
-    	    wei[wordArr.index(word)] += idf[word]
-        end
-	tmp = gets
-    end
+lines=[]
 
-    hash = Hash[wordArr.zip wei]
-
-    arr = hash.sort{|a, b| b[1] <=> a[1]}
-
-
-    for i in 0..arr.length-1 do
-        print(arr[i][0], ":", arr[i][1], " ")
-    end
+STDIN.each{|line|
+  if !(getWord(line) == "EOS") then
+    lines.push(line)
+  else
+    tf = makeTf(lines)
+    tf_idf = {}
+    tf.each_key{|key|
+      tf_idf[key] = idf[key]*tf[key]
+    }
+    ary = tf_idf.sort{|a, b| b[1] <=> a[1]}
+    ary.each{|val| print(val[0], ":", val[1], " ")}
+    lines=[]
     print("\n")
-    if tmp.nil? then
-        break
-    end 
-end
-
+  end
+}
 

@@ -22,8 +22,13 @@ while true do
         word = getWord(tmp)
     end
 
-    for i in 0..wordArr.length-1 do
-        print(wordArr[i], ":", wei[i], "\t")
+    hash = Hash[wordArr.zip wei]
+
+    arr = hash.sort{|a, b| b[1] <=> a[1]}
+
+
+    for i in 0..arr.length-1 do
+        print(arr[i][0], ":", arr[i][1], " ")
     end
     print("\n")
     if tmp.nil? then
