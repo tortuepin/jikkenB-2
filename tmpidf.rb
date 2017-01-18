@@ -40,8 +40,9 @@ def makeIdf(filenames)
 
     idf.each_key do |key|
         #dftmp = Math.log(n) - Math.log(idf[key]) + 1
-        dftmp = n/idf[key] 
-        dftmp = Math.log(dftmp) + 1
+        dftmp = n/idf[key].to_f
+        #print(key, " n = ", n, " idf[key] = ", idf[key], " n/idf[key] = " , dftmp, "\n")
+        dftmp = Math.log(dftmp).to_f + 1
         idf[key] = dftmp
 
     end
@@ -73,7 +74,7 @@ STDIN.each{|line|
     tf = makeTf(lines)
     tf_idf = {}
     tf.each_key{|key|
-      tf_idf[key] = idf[key]*tf[key]
+      tf_idf[key] = idf[key]*tf[key].to_f
     }
     ary = tf_idf.sort{|a, b| b[1] <=> a[1]}
     ary.each{|val| print(val[0], ":", val[1], " ")}
