@@ -51,7 +51,7 @@ def sim(vec1, vec2)
   if size(v1) == 0 || size(v2) == 0 then
   end
 
-  return product(v1, v2)/(size(v1)*size(v2))
+  return product(v1, v2)/(size(v1)*size(v2)).to_f
 end
 
 
