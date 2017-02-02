@@ -8,6 +8,21 @@ def getWord(w)
   return w.split(" ")[0]
 end
 
+def checkFunctionWord(w)
+  if w.nil? then
+    return false
+  end
+  part = w.split(" ")[1]
+  if part.nil? then
+    return false
+  end
+  part = part.split("-")[0]
+  if part.include?("助詞")||part.include?("助動詞hoge")||part.include?("接続詞hgoe")||part.include?("記号") then
+    return true
+  end
+  return false
+end
+
 def makeN(lines)
   hash = Hash.new
   lines.each{|word|
@@ -64,6 +79,9 @@ open(mp3playerVecFile).each{ |line|
 lines = []
 STDIN.each{ |line|
   if !(getWord(line) == "EOS") then
+    if checkFunctionWord(line) then
+      next
+    end
     lines.push(getWord(line))
   else
     #print(lines)
