@@ -66,7 +66,7 @@ STDIN.each{ |line|
   if !(getWord(line) == "EOS") then
     lines.push(getWord(line))
   else
-    print(lines)
+    #print(lines)
     cleaner_sum = 0
     mp3player_sum = 0
     # nを計算する
@@ -77,6 +77,7 @@ STDIN.each{ |line|
     lines.each{|word|
       cleaner_sum += n[word]*Math.log(getP(word, cleaner_p).to_f).to_f
       mp3player_sum += n[word]*Math.log(getP(word, mp3player_p).to_f).to_f
+#      print(n[word], " ", word, "\n")
     }
 
     # 意思決定

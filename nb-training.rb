@@ -21,6 +21,7 @@ def makeP(filename)
   f.close
 
   p = Hash.new
+#  print(sum, " ", tmpP.length, "\n" )
 
   tmpP.each{ |key, val|
     p[key] = (val+1).to_f/(sum+tmpP.length).to_f
